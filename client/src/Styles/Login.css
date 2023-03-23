@@ -1,0 +1,56 @@
+.Login {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginHeading {
+  text-align: center;
+}
+
+.nameLabel,
+.emailLabel {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.nameInput,
+.emailInput {
+  width: 5rem;
+  height: 3rem;
+  width: 25rem;
+  height: 2.5rem;
+  border-radius: 3px;
+  border: none;
+  font-size: 1.4rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid white;
+  padding: 2rem;
+  border-radius: 10px;
+  background-color: #9e9ef7;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+form button {
+  width: 25rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.4rem;
+  background-color: #d2d2ff;
+  margin: auto;
+  margin-top: 1rem;
+  cursor: pointer;
+}
