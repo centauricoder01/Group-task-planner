@@ -1,0 +1,56 @@
+.mainTaskDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  overflow-x: scroll;
+  padding: 1rem;
+}
+
+.singleTaskDiv {
+  background-color: white;
+  overflow-y: scroll;
+  height: 35rem;
+  width: 20rem;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+}
+
+.singleTaskDiv h1 {
+  background-color: #d8d8ff;
+  border-radius: 10px;
+  border: none;
+  text-align: center;
+}
+
+.singleDiv {
+  border-radius: 10px;
+  border: 1px solid;
+  background-color: rgb(194 219 248);
+  padding: 5px;
+  margin-bottom: 1rem;
+}
+
+.firstDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -20px;
+}
+
+.firstDiv p {
+  background-color: red;
+  color: white;
+  border-radius: 38px;
+  width: 4rem;
+  height: 1.5rem;
+  text-align: center;
+}
+
+.firstDiv div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
