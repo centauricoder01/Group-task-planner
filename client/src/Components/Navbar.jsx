@@ -10,7 +10,6 @@ const Navbar = () => {
           src="https://res.cloudinary.com/diverse/image/upload/v1679633801/diverse/sbbvjvjlkrdfxas2qfjz.png"
           alt="two"
         />
-        <p>@Masai</p>
       </div>
     </div>
   );

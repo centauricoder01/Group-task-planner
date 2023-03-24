@@ -1,21 +1,50 @@
 const { AuthModel } = require("../Models/Auth");
 
-const LoginUser = async (req, res) => {
-  const { email, name, org } = req.body;
-  let getbyemail = await AuthModel.findOne({ email });
-  if (getbyemail) {
-    return res.send({ user: getbyemail, message: "Successful" });
+const SignupUser = async (req, res) => {
+  try {
+    const { email, name, institute } = req.body;
+    let getbyemail = await AuthModel.findOne({ email });
+    if (getbyemail) {
+      return res.send({ user: getbyemail, message: "Successful" });
+    }
+
+    const newUser = new AuthModel({
+      email,
+      name,
+      institute,
+    });
+
+    let ReturnedUser = await newUser.save();
+
+    res.send({ user: ReturnedUser, message: "Successful" });
+  } catch (error) {
+    res.send({ message: "Some Error", error });
   }
-
-  const newUser = new AuthModel({
-    email,
-    name,
-    org,
-  });
-
-  let ReturnedUser = await newUser.save();
-
-  res.send({ user: ReturnedUser, message: "Successful" });
 };
 
-module.exports = { LoginUser };
+const AddAvatar = async (req, res) => {
+  try {
+    const { value, id } = req.body;
+    await AuthModel.findByIdAndUpdate(id, { avatar: value });
+    let findUser = await AuthModel.findById(id);
+    res.send({ message: "Avatar Added", findUser });
+  } catch (error) {
+    res.send({ message: "Some Error Occured" });
+  }
+};
+
+const LoginUser = async (req, res) => {
+  try {
+    let { email } = req.body;
+    console.log(email);
+    let user = await AuthModel.findOne({ email });
+    if (!user) {
+      return res.send({ message: "User Not found" });
+    }
+    res.send({ message: "User Find", findUser: user });
+  } catch (error) {
+    res.send({ message: "Some Error Occcured", error });
+  }
+};
+
+module.exports = { SignupUser, AddAvatar, LoginUser };

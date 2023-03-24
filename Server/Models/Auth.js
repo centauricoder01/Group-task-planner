@@ -6,7 +6,8 @@ const AuthSchema = mongoose.Schema(
   {
     name: reqString,
     email: reqString,
-    org: reqString,
+    institute: reqString,
+    avatar: String,
   },
   {
     timestamps: true,

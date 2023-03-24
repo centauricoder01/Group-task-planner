@@ -1,13 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const { LoginUser } = require("./Controllers/Login");
+const { AddAvatar, SignupUser, LoginUser } = require("./Controllers/Login");
 const app = express();
 require("dotenv").config();
 
 app.use(cors());
 app.use(express.json());
 
+app.post("/signup", SignupUser);
+app.patch("/avatar", AddAvatar);
 app.post("/login", LoginUser);
 
 mongoose

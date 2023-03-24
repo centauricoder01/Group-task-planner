@@ -1,10 +1,12 @@
 .mainTaskDiv {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  overflow-x: scroll;
   padding: 1rem;
+  width: 80%;
+  margin: auto;
 }
 
 .singleTaskDiv {
@@ -15,6 +17,15 @@
   padding: 10px;
   border: none;
   border-radius: 10px;
+}
+
+.singleTaskDiv::-webkit-scrollbar {
+  width: 6px;
+  border-left: 1px solid #e6ecf8;
+}
+.singleTaskDiv::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 100vw;
 }
 
 .singleTaskDiv h1 {
