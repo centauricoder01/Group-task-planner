@@ -1,0 +1,22 @@
+.navbarDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: rgb(194, 219, 248);
+}
+
+.navbarDiv div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbarDiv div img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 20rem;
+  margin-bottom: -20px;
+}
