@@ -8,6 +8,7 @@ const {
   DeleteTask,
   GetSprint,
   UpdateTask,
+  DeleteSprint,
 } = require("./Controllers/SprintController");
 const app = express();
 require("dotenv").config();
@@ -24,6 +25,7 @@ app.post("/getsprint", GetSprint);
 app.post("/task", AddTask);
 app.delete("/deletetask", DeleteTask);
 app.patch("/updatetask", UpdateTask);
+app.delete("/deletesprint", DeleteSprint);
 
 mongoose
   .connect(process.env.MONGO_URL, {})

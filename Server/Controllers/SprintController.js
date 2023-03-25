@@ -77,4 +77,21 @@ const UpdateTask = async (req, res) => {
   }
 };
 
-module.exports = { AddSprint, AddTask, DeleteTask, GetSprint, UpdateTask };
+const DeleteSprint = async (req, res) => {
+  try {
+    const { sprintID } = req.body;
+    await SprintModel.findByIdAndDelete(sprintID);
+    res.send({ message: "Sprint Deleted" });
+  } catch (error) {
+    res.send({ message: "Some Error", error });
+  }
+};
+
+module.exports = {
+  AddSprint,
+  AddTask,
+  DeleteTask,
+  GetSprint,
+  UpdateTask,
+  DeleteSprint,
+};

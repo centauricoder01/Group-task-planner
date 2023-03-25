@@ -6,6 +6,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { AddTask, DeleteTask, getSprint } from "../Redux/TaskRedux/Action";
 import { Input, Modal } from "antd";
+import { Popconfirm } from "antd";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -51,7 +52,11 @@ const Home = () => {
   };
 
   const DeleteTheTask = (sprintID, taskID) => {
-    dispatch(DeleteTask(sprintID, taskID));
+    dispatch(DeleteTask(sprintID, taskID)).then((res) => {
+      if (res.message === "Value Deleted") {
+        dispatch(getSprint(user.institute));
+      }
+    });
   };
 
   useEffect(() => {
@@ -77,12 +82,15 @@ const Home = () => {
                   )}
                   <div>
                     <GrEdit style={{ cursor: "pointer" }} />
-                    <AiFillDelete
-                      onClick={() => {
+                    <Popconfirm
+                      title="Alert"
+                      description="Do you really want to create this task."
+                      onConfirm={() => {
                         DeleteTheTask(ele._id, elem._id);
                       }}
-                      style={{ cursor: "pointer" }}
-                    />
+                    >
+                      <AiFillDelete style={{ cursor: "pointer" }} />
+                    </Popconfirm>
                   </div>
                 </div>
                 <p>{elem.detail}</p>

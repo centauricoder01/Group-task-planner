@@ -38,9 +38,13 @@ const AddSprint = (name, institute) => async (dispatch) => {
 
 const DeleteTask = (sprintID, taskID) => async (dispatch) => {
   try {
-    let data = await axios.delete(`${URL}/deletetask`, { sprintID, taskID });
-    console.log(data.data);
-    return data.data;
+    const data = await fetch(`${URL}/deletetask`, {
+      method: "DELETE",
+      body: JSON.stringify({ sprintID, taskID }),
+      headers: { "Content-Type": "application/json" },
+    });
+    let res = await data.json();
+    return res;
   } catch (error) {
     console.log(error);
   }
