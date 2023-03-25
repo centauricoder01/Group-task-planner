@@ -4,7 +4,7 @@ import "../Styles/Home.css";
 import { GrEdit } from "react-icons/gr";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { AddTask, getSprint } from "../Redux/TaskRedux/Action";
+import { AddTask, DeleteTask, getSprint } from "../Redux/TaskRedux/Action";
 import { Input, Modal } from "antd";
 
 const Home = () => {
@@ -50,6 +50,10 @@ const Home = () => {
     setIsModalOpen(false);
   };
 
+  const DeleteTheTask = (sprintID, taskID) => {
+    dispatch(DeleteTask(sprintID, taskID));
+  };
+
   useEffect(() => {
     dispatch(getSprint(user.institute));
   }, []);
@@ -63,21 +67,26 @@ const Home = () => {
               <h3>{ele.name}</h3>
               <button onClick={() => showModal(ele._id)}>Add</button>
             </div>
-            {ele.task.map((ele, i) => (
+            {ele.task.map((elem, i) => (
               <div className="singleDiv" key={i}>
                 <div className="firstDiv">
-                  {ele.status === "Pending" ? (
-                    <p style={{ backgroundColor: "red" }}>{ele.status}</p>
+                  {elem.status === "Pending" ? (
+                    <p style={{ backgroundColor: "red" }}>{elem.status}</p>
                   ) : (
-                    <p style={{ backgroundColor: "green" }}>{ele.status}</p>
+                    <p style={{ backgroundColor: "green" }}>{elem.status}</p>
                   )}
                   <div>
-                    <GrEdit />
-                    <AiFillDelete />
+                    <GrEdit style={{ cursor: "pointer" }} />
+                    <AiFillDelete
+                      onClick={() => {
+                        DeleteTheTask(ele._id, elem._id);
+                      }}
+                      style={{ cursor: "pointer" }}
+                    />
                   </div>
                 </div>
-                <p>{ele.detail}</p>
-                <p>{ele.assignee}</p>
+                <p>{elem.detail}</p>
+                <p>{elem.assignee}</p>
               </div>
             ))}
           </div>

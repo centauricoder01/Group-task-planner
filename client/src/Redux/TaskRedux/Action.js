@@ -1,5 +1,5 @@
 import axios from "axios";
-const URL = "http://localhost:8080";
+const URL = "https://gold-fly-garb.cyclic.app";
 
 const getSprint = (org) => (dispatch) => {
   axios
@@ -35,4 +35,15 @@ const AddSprint = (name, institute) => async (dispatch) => {
     console.log(error);
   }
 };
-export { getSprint, AddTask, AddSprint };
+
+const DeleteTask = (sprintID, taskID) => async (dispatch) => {
+  try {
+    let data = await axios.delete(`${URL}/deletetask`, { sprintID, taskID });
+    console.log(data.data);
+    return data.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { getSprint, AddTask, AddSprint, DeleteTask };

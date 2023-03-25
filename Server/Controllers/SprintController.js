@@ -52,16 +52,29 @@ const DeleteTask = async (req, res) => {
   try {
     const { sprintID, taskID } = req.body;
 
-    let findbyID = await SprintModel.findById(sprintID);
-    let newValue = findbyID.task.filter((ele) => {
-      return ele._id !== taskID;
-    });
-    let returnValue = await findbyID.save();
-    console.log(newValue);
-    res.send({ message: "Value Deleted" });
+    let findbyID = await SprintModel.findByIdAndUpdate(
+      sprintID,
+      { $pull: { task: { _id: taskID } } },
+
+      { new: true }
+    );
+
+    res.send({ message: "Value Deleted", newID: findbyID });
   } catch (error) {
     res.send({ message: "Some Error", error });
   }
 };
 
-module.exports = { AddSprint, AddTask, DeleteTask, GetSprint };
+const UpdateTask = async (req, res) => {
+  try {
+    const { sprintID, taskID } = req.body;
+
+    await SprintModel.update(sprintID, taskID, { $set: { task: req.body } });
+
+    res.send({ message: "Tasked Updated" });
+  } catch (error) {
+    res.send({ message: "Some error", error });
+  }
+};
+
+module.exports = { AddSprint, AddTask, DeleteTask, GetSprint, UpdateTask };

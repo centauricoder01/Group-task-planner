@@ -1,5 +1,5 @@
 import axios from "axios";
-const URL = "http://localhost:8080";
+const URL = "https://gold-fly-garb.cyclic.app";
 
 const SignupUser = (userData) => async (dispatch) => {
   try {
