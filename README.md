@@ -42,124 +42,64 @@
 <p align="center">
   <br />&#10023;
   <a href="#Demo">View Demo</a> &#10023;
-  <a href="https://github.com/m-sehrawat/Nike-Clone/issues">Report Bug</a> &#10023;
+  <a href="https://github.com/centauricoder01/Paypal-Assignment/issues">Report Bug</a> &#10023;
   <a href="#Getting-Started">Getting Started</a> &#10023; 
   <a href="#Install">Installing</a> &#10023;
   <a href="#Contact">Author</a> &#10023;
 </p>
 
 
-Nike Clone is MERN Stack e-commerce web application that allows you to buy shoes & clothes online with payment gateway integration. It has a variety of categories, just visit the product listing page and you will see all the products, apply filters as per your need and in just a few clicks you can buy any products from the website. This project is just for educational purpose.
+task planner is basically a website, where you can plan your task assign, the task to the other person who belongs to your organization and also updated it, based on the status. Its completely free and ready to use application that you can use in your daily life.
 
-
-
-![cover](https://user-images.githubusercontent.com/91532881/175955112-da88c18c-ac5e-455a-9ac5-047c7db4f894.png)
+![cover](https://user-images.githubusercontent.com/103047446/227739623-41bfa193-750b-406f-869b-c833707c850a.png)
 
 <br />
 
-## Screens ( All screens are responsive along with Dark Mode)
-- Homepage / Landing Page
-- Product Listing Page with Filters
-- Product Description Page
-- Cart Management Page
-- Wishlist/Favourites Management Page
-- Checkout with Address Management Page
-- Login / Logout Page
+## Screens ( All screens )
+- Login
 - Signup Page
-- Order Summary Page
-
+- Add Avatar Page
+- Home page
 
 <br />
 
 
 ## 🚀 Features
 - Login and Signup User Account
-- JWT (Json Web Token) Authentication and BcryptJS Password Hashing 
-- Product Filters Based on Price, Category, Size, Color and Gender
-- Product Sorting Based on Price, Rating and Name
-- Product Filtering and Sorting works together 
-- My Orders Section for details of all ordered item
-- Wishlist Add and Remove Items
-- Cart Add and Remove Items 
-- Cart Update Quantities 
-- Address Management
-- Order Summary
-- Coupons provided for discount
-- Razorpay Payment Gateway
-- Darkmode available
+- Add Sprint
+- Add Tasks
+- Delete Tasks
+- Update Tasks
+- Assign task to other people from same Org.
+- Delete Sprint
+- form Validation
 
 <br />
 
-## Glimpses of Nike-Clone 🙈 :
+## Glimpses of Task Planner🙈 :
 
+![Screenshot 2023-03-26 015550](https://user-images.githubusercontent.com/103047446/227740003-cb88907e-9f13-410a-b67b-99ead469105d.png)
 
-<table>
-  <tr>
-    <td><img src="https://user-images.githubusercontent.com/91532881/175955122-200a6ccb-54a5-4f39-9bc2-cd3ba3a4d102.jpeg" alt="home" /></td>
-    <td><img src="https://user-images.githubusercontent.com/91532881/175955109-b51e3e81-4cd8-4f00-a8cd-873c82882a15.png" alt="coupons" /></td>
-  </tr>
-  <tr>
-    <td><img src="https://user-images.githubusercontent.com/91532881/175955141-44aefea0-a9ee-4c3a-93e0-094ca9214e54.jpeg" alt="signup" /></td>
-    <td><img src="https://user-images.githubusercontent.com/91532881/175955129-e5392377-e72a-4868-883f-5a244fc9bc87.jpeg" alt="login" /></td>
-  </tr>
-  <tr>
-    <td><img src="https://user-images.githubusercontent.com/91532881/175955097-9fe2e5a5-b4f4-4c1f-beb7-4080186e5a17.jpeg" alt="allProducts" /></td>
-    <td><img src="https://user-images.githubusercontent.com/91532881/175957017-3530fe22-46ae-4bf7-a645-55f7a5f25ed9.jpeg" alt="men" /></td>
-  </tr>
-  <tr>
-    <td><img src="https://user-images.githubusercontent.com/91532881/175955142-dd33e21a-49a9-4aeb-89e7-edb3e871828f.jpeg" alt="women" /></td>
-    <td><img src="https://user-images.githubusercontent.com/91532881/175955126-2874a5c1-8655-40ab-b9ce-67275139e70e.jpeg" alt="kids" /></td>
-  </tr>
-  <tr>
-    <td><img src="https://user-images.githubusercontent.com/91532881/175955114-1090036d-2e73-46fa-8aca-8ef9ffab1724.jpeg" alt="description" /></td>
-    <td><img src="https://user-images.githubusercontent.com/91532881/175955117-edff5eaf-7507-4580-b3b8-3aea6c089840.jpeg" alt="descriptionDark" /></td>
-  </tr>
-  <tr>
-    <td><img src="https://user-images.githubusercontent.com/91532881/175955106-867749b1-4838-40dc-b184-145f10d1eec2.jpeg" alt="cart" /></td>
-    <td><img src="https://user-images.githubusercontent.com/91532881/175955107-f93e13a0-6c50-46e8-a5f3-09d15421e97b.jpeg" alt="checkout" /></td>
-  </tr>
-  <tr>
-    <td><img src="https://user-images.githubusercontent.com/91532881/175955137-828f89b2-648e-4a68-885a-fa3f3f29b55c.png" alt="razorpay" /></td>
-    <td><img src="https://user-images.githubusercontent.com/91532881/175955133-96792a4b-7e70-4e1e-a5cf-999da70a9c95.jpeg" alt="orders" /></td>
-  </tr>
-</table>
+![Screenshot 2023-03-26 015631](https://user-images.githubusercontent.com/103047446/227740009-ea9242ca-1fff-48e7-ada2-81bd0e1278fd.png)
 
-<br />
+![Screenshot 2023-03-26 015532](https://user-images.githubusercontent.com/103047446/227740007-2d4169e8-ce79-44d8-a10d-9d0fdb75b8d9.png)
 
-## Test Coupon Codes
-```
-NIKE5 (for 5% Off)
+![Screenshot 2023-03-26 014758](https://user-images.githubusercontent.com/103047446/227740019-ce848217-f051-4371-9fdc-08b2439ae29b.png)
 
-NIKE10 (for 10% Off)
+![Screenshot 2023-03-26 015330](https://user-images.githubusercontent.com/103047446/227740023-43303b91-71e9-48b5-9ad5-4fc5c465af82.png)
 
-NIKE15 (for 15% Off)
+![Screenshot 2023-03-26 015353](https://user-images.githubusercontent.com/103047446/227740025-aa56fe43-bc7b-49c2-a4ea-2d2417a18fa8.png)
 
-NIKE20 (for 15% Off)
+![Screenshot 2023-03-26 015446](https://user-images.githubusercontent.com/103047446/227740028-e4d89af0-0b1b-4aaf-96f6-acaeba2d8388.png)
 
-NIKE25 (for 25% Off)
-
-NIKE30 (for 30% Off)
-```
-
-## Razorpay test payment Cards
-
-[Click here to use the razorpay testing payment methods](https://razorpay.com/docs/payments/payments/test-card-upi-details/)
-
-
-<br />
-
-
-<h2>Demo</h2>
-
-[Click here to see the presentation video of this project](https://www.linkedin.com/posts/m-sehrawat_reactjs-nike-nikecareers-activity-6947552300534042624-me2_?utm_source=linkedin_share&utm_medium=member_desktop_web)
-
+![Screenshot 2023-03-26 015412](https://user-images.githubusercontent.com/103047446/227740073-d958b42a-4b37-4a31-8b31-dd89d0e262c8.png)
 
 <br />
 
 
 ## Getting Started
 
-This project was built using React, Redux, Chakra UI, HTML, CSS, JavaScript, Rest API, Node JS, Express and MongoDB with JWT and RazorPay integration. It is an e-commerce web application and for running on your local environment you should follow these guidelines.
+This project was built using React, Redux, Ant Design, HTML, CSS, JavaScript, Rest API, Node JS, Express and MongoDB. It is an Task planner web application and for running on your local environment you should follow these guidelines.
 
 
 ### Prerequisites
@@ -171,19 +111,19 @@ This project was built using React, Redux, Chakra UI, HTML, CSS, JavaScript, Res
 ### Setup
 
 
-The project repository can be found in [GitHub link](https://github.com/m-sehrawat/Nike-Clone) or just clone the project using this command.
+The project repository can be found in [GitHub link](https://github.com/centauricoder01/Paypal-Assignment) or just clone the project using this command.
 
 
 ```
 Using HTTPS
 
-# git clone https://github.com/m-sehrawat/Nike-Clone.git
+# git clone https://github.com/centauricoder01/Paypal-Assignment
 ```
 
 + Open terminal on your workspace with
 
 ```
-cd /home/workspace/Nike-Clone
+cd /home/workspace/Paypal-Assignment
 ```
 
 
@@ -241,35 +181,26 @@ npm start
 
 To run this project, you will need to add the following environment variables to your .env file in server folder
 
-`JWT_ACCESS_KEY`
 
-`MONGO_PATH`
+`MONGO_URL`
 
-`RAZORPAY_KEY_ID`
-
-`RAZORPAY_KEY_SECRET`
-
-
+`PORT`
 
 ### Tools used on this project
 
 - Visual Studio Code
-- Vite-JS template
 - MongoDB compass
-- Razorpay Dashboard to monitor payments
 
 <br />
-
-
 
 ## Contact
 
 If you want to contact me, you can reach me through below handles.
 
-[![linkedin](https://img.shields.io/badge/Mohit_Sehrawat-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/m-sehrawat/)
-[![GitHub](https://img.shields.io/badge/Mohit_Sehrawat-20232A?style=for-the-badge&logo=Github&logoColor=white)](https://github.com/m-sehrawat/)
+[![linkedin](https://img.shields.io/badge/Rajendra_Patel-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rajendra01/)
+[![GitHub](https://img.shields.io/badge/Rajendra_Patel-20232A?style=for-the-badge&logo=Github&logoColor=white)](https://github.com/centauricoder01)
 
-© 2022 Mohit Sehrawat
+© 2022 Rajendra Patel
 
 
 
