@@ -5,7 +5,7 @@ import { GrEdit } from "react-icons/gr";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { AddTask, getSprint } from "../Redux/TaskRedux/Action";
-import { Button, Input, Modal } from "antd";
+import { Input, Modal } from "antd";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -32,12 +32,16 @@ const Home = () => {
 
   const handleOk = () => {
     setIsModalOpen(false);
-    console.log(Taskvalue);
     dispatch(
       AddTask(sprintId, Taskvalue.status, Taskvalue.details, Taskvalue.assignee)
     ).then((res) => {
       if (res.message === "Task Added") {
         dispatch(getSprint(user.institute));
+        setTaskValue({
+          status: "",
+          details: "",
+          assignee: "",
+        });
       }
     });
   };

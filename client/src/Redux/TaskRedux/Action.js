@@ -26,4 +26,13 @@ const AddTask = (id, status, detail, assignee) => async (disptach) => {
   }
 };
 
-export { getSprint, AddTask };
+const AddSprint = (name, institute) => async (dispatch) => {
+  try {
+    let data = await axios.post(`${URL}/sprint`, { name, institute });
+    console.log(data.data);
+    return data.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export { getSprint, AddTask, AddSprint };
