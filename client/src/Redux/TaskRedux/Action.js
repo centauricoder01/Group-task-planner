@@ -5,11 +5,25 @@ const getSprint = (org) => (dispatch) => {
   axios
     .post(`${URL}/getsprint`, { org })
     .then((res) => {
-      console.log(res.data, "GetSprint Data");
+      dispatch({ type: "GetValue", payload: res.data.sprint });
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-export { getSprint };
+const AddTask = (id, status, detail, assignee) => async (disptach) => {
+  try {
+    let data = await axios.post(`${URL}/task`, {
+      id,
+      status,
+      detail,
+      assignee,
+    });
+    return data.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { getSprint, AddTask };

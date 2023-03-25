@@ -1,17 +1,51 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
 import "../Styles/Home.css";
 import { GrEdit } from "react-icons/gr";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { getSprint } from "../Redux/TaskRedux/Action";
+import { AddTask, getSprint } from "../Redux/TaskRedux/Action";
+import { Button, Input, Modal } from "antd";
 
 const Home = () => {
   const dispatch = useDispatch();
   const { sprint } = useSelector((ele) => ele.Task);
   const { user } = useSelector((ele) => ele.Auth);
 
-  console.log(sprint, user.institute);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [sprintId, setsprintId] = useState("");
+  const [Taskvalue, setTaskValue] = useState({
+    status: "",
+    details: "",
+    assignee: "",
+  });
+
+  const HandleChange = (e) => {
+    setTaskValue({ ...Taskvalue, [e.target.name]: e.target.value });
+  };
+
+  const showModal = (id) => {
+    setIsModalOpen(true);
+    setsprintId(id);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+    console.log(Taskvalue);
+    dispatch(
+      AddTask(sprintId, Taskvalue.status, Taskvalue.details, Taskvalue.assignee)
+    ).then((res) => {
+      if (res.message === "Task Added") {
+        dispatch(getSprint(user.institute));
+      }
+    });
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   useEffect(() => {
     dispatch(getSprint(user.institute));
   }, []);
@@ -19,54 +53,60 @@ const Home = () => {
     <div>
       <Navbar />
       <div className="mainTaskDiv">
-        <div className="singleTaskDiv">
-          <h1>Bug</h1>
-          <div className="singleDiv">
-            <div className="firstDiv">
-              <p>status</p>
-              <div>
-                <GrEdit />
-                <AiFillDelete />
-              </div>
+        {sprint.map((ele, i) => (
+          <div className="singleTaskDiv" key={i}>
+            <div className="Heading">
+              <h3>{ele.name}</h3>
+              <button onClick={() => showModal(ele._id)}>Add</button>
             </div>
-            <p>This is my work to be done by me only, noone will touch it.</p>
-            <p>Rajendra Patel</p>
-          </div>
-          <div className="singleDiv">
-            <div className="firstDiv">
-              <p>status</p>
-              <div>
-                <GrEdit />
-                <AiFillDelete />
+            {ele.task.map((ele, i) => (
+              <div className="singleDiv" key={i}>
+                <div className="firstDiv">
+                  {ele.status === "Pending" ? (
+                    <p style={{ backgroundColor: "red" }}>{ele.status}</p>
+                  ) : (
+                    <p style={{ backgroundColor: "green" }}>{ele.status}</p>
+                  )}
+                  <div>
+                    <GrEdit />
+                    <AiFillDelete />
+                  </div>
+                </div>
+                <p>{ele.detail}</p>
+                <p>{ele.assignee}</p>
               </div>
-            </div>
-            <p>This is my work to be done by me only, noone will touch it.</p>
-            <p>Rajendra Patel</p>
+            ))}
           </div>
-          <div className="singleDiv">
-            <div className="firstDiv">
-              <p>status</p>
-              <div>
-                <GrEdit />
-                <AiFillDelete />
-              </div>
-            </div>
-            <p>This is my work to be done by me only, noone will touch it.</p>
-            <p>Rajendra Patel</p>
-          </div>
-          <div className="singleDiv">
-            <div className="firstDiv">
-              <p>status</p>
-              <div>
-                <GrEdit />
-                <AiFillDelete />
-              </div>
-            </div>
-            <p>This is my work to be done by me only, noone will touch it.</p>
-            <p>Rajendra Patel</p>
-          </div>
-        </div>
+        ))}
       </div>
+
+      <Modal
+        title="Add Task"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <form>
+          <Input
+            placeholder="Status"
+            name="status"
+            value={Taskvalue.status}
+            onChange={HandleChange}
+          />
+          <Input
+            placeholder="Detail"
+            name="details"
+            value={Taskvalue.details}
+            onChange={HandleChange}
+          />
+          <Input
+            placeholder="Assignee"
+            name="assignee"
+            value={Taskvalue.assignee}
+            onChange={HandleChange}
+          />
+        </form>
+      </Modal>
     </div>
   );
 };

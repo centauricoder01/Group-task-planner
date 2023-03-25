@@ -31,10 +31,6 @@ const AddTask = async (req, res) => {
   try {
     const { id, status, detail, assignee } = req.body;
 
-    if (!id) {
-      return res.send({ message: "Please Send Id" });
-    }
-
     let findbyID = await SprintModel.findById(id);
 
     let taskObj = {
