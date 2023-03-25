@@ -4,7 +4,6 @@ import "../Styles/Home.css";
 import { GrEdit } from "react-icons/gr";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { message } from "antd";
 
 import {
   AddTask,
@@ -71,7 +70,6 @@ const Home = () => {
       taskID: elem._id,
     });
   };
-  const [messageApi, contextHolder] = message.useMessage();
 
   const handleOk = () => {
     setIsModalOpen(false);
@@ -99,17 +97,7 @@ const Home = () => {
 
   const handleOkTwo = () => {
     setIsModalOpenTwo(false);
-    if (
-      updateTaskValue.assignee === "" ||
-      updateTaskValue.details === "" ||
-      updateTaskValue.status === ""
-    ) {
-      return messageApi.open({
-        type: "info",
-        content: "Please Fill All the Details",
-        duration: 3,
-      });
-    }
+
     dispatch(
       UpdatingTask(UpdateTaskID.sprintID, UpdateTaskID.taskID, updateTaskValue)
     ).then((res) => {
@@ -140,63 +128,78 @@ const Home = () => {
     dispatch(GetUser(user.institute)).then((res) => {
       setAllUser(res.user);
     });
-  }, []);
+  }, [dispatch, user.institute]);
   return (
     <div>
       <Navbar />
-      <div className="mainTaskDiv">
-        {sprint.map((ele, i) => (
-          <div className="singleTaskDiv" key={i}>
-            <div className="Heading">
-              <h3>{ele.name}</h3>
-              <div style={{ gap: "1rem" }}>
-                <button onClick={() => showModal(ele._id)}>Add</button>
-                <Popconfirm
-                  title="Alert"
-                  description="Do you really want to create this Sprint."
-                  onConfirm={() => {
-                    dispatch(DeleteSprint(ele._id)).then((res) => {
-                      if (res.message === "Sprint Deleted") {
-                        dispatch(getSprint(user.institute));
-                      }
-                    });
-                  }}
-                >
-                  <button>Delete</button>
-                </Popconfirm>
-              </div>
-            </div>
-            {ele.task.map((elem, i) => (
-              <div className="singleDiv" key={i}>
-                <div className="firstDiv">
-                  {elem.status === "Pending" ? (
-                    <p style={{ backgroundColor: "red" }}>{elem.status}</p>
-                  ) : (
-                    <p style={{ backgroundColor: "green" }}>{elem.status}</p>
-                  )}
-                  <div>
-                    <GrEdit
-                      style={{ cursor: "pointer" }}
-                      onClick={() => showModalTwo(elem, ele)}
-                    />
-                    <Popconfirm
-                      title="Alert"
-                      description="Do you really want to create this task."
-                      onConfirm={() => {
-                        DeleteTheTask(ele._id, elem._id);
-                      }}
-                    >
-                      <AiFillDelete style={{ cursor: "pointer" }} />
-                    </Popconfirm>
-                  </div>
+
+      {sprint.length === 0 ? (
+        <div className="noTaskDiv">
+          <h1 style={{ textAlign: "center" }}>
+            Please Create Some Sprint To show Here.
+          </h1>
+          <img
+            src={
+              "https://cdni.iconscout.com/illustration/premium/thumb/task-completion-6333613-5230173.png"
+            }
+            alt="task"
+          />
+        </div>
+      ) : (
+        <div className="mainTaskDiv">
+          {sprint.map((ele, i) => (
+            <div className="singleTaskDiv" key={i}>
+              <div className="Heading">
+                <h3>{ele.name}</h3>
+                <div style={{ gap: "1rem" }}>
+                  <button onClick={() => showModal(ele._id)}>Add</button>
+                  <Popconfirm
+                    title="Alert"
+                    description="Do you really want to create this Sprint."
+                    onConfirm={() => {
+                      dispatch(DeleteSprint(ele._id)).then((res) => {
+                        if (res.message === "Sprint Deleted") {
+                          dispatch(getSprint(user.institute));
+                        }
+                      });
+                    }}
+                  >
+                    <button>Delete</button>
+                  </Popconfirm>
                 </div>
-                <p>{elem.detail}</p>
-                <p>{elem.assignee}</p>
               </div>
-            ))}
-          </div>
-        ))}
-      </div>
+              {ele.task.map((elem, i) => (
+                <div className="singleDiv" key={i}>
+                  <div className="firstDiv">
+                    {elem.status === "Pending" ? (
+                      <p style={{ backgroundColor: "red" }}>{elem.status}</p>
+                    ) : (
+                      <p style={{ backgroundColor: "green" }}>{elem.status}</p>
+                    )}
+                    <div>
+                      <GrEdit
+                        style={{ cursor: "pointer" }}
+                        onClick={() => showModalTwo(elem, ele)}
+                      />
+                      <Popconfirm
+                        title="Alert"
+                        description="Do you really want to create this task."
+                        onConfirm={() => {
+                          DeleteTheTask(ele._id, elem._id);
+                        }}
+                      >
+                        <AiFillDelete style={{ cursor: "pointer" }} />
+                      </Popconfirm>
+                    </div>
+                  </div>
+                  <p>{elem.detail}</p>
+                  <p>{elem.assignee}</p>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
 
       <Modal
         title="Add Task"

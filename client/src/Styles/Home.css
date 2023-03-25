@@ -89,3 +89,10 @@ select {
   border: none;
   border-radius: 3px;
 }
+
+.noTaskDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
