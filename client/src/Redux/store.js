@@ -6,11 +6,13 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import { AuthReducer } from "./AuthRedux/Reducer";
+import { TaskReducer } from "./TaskRedux/Reducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   Auth: AuthReducer,
+  Task: TaskReducer,
 });
 
 export const store = createStore(

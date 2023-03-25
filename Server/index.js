@@ -2,6 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const { AddAvatar, SignupUser, LoginUser } = require("./Controllers/Login");
+const {
+  AddSprint,
+  AddTask,
+  DeleteTask,
+  GetSprint,
+} = require("./Controllers/SprintController");
 const app = express();
 require("dotenv").config();
 
@@ -11,6 +17,10 @@ app.use(express.json());
 app.post("/signup", SignupUser);
 app.patch("/avatar", AddAvatar);
 app.post("/login", LoginUser);
+app.post("/sprint", AddSprint);
+app.post("/getsprint", GetSprint);
+app.post("/task", AddTask);
+app.delete("/deletetask", DeleteTask);
 
 mongoose
   .connect(process.env.MONGO_URL, {})
