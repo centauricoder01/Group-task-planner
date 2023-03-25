@@ -37,16 +37,16 @@ const Navbar = () => {
 
   return (
     <div className="navbarDiv">
-      <h2>Centauri</h2>
+      <h2>Task Planner</h2>
       <Button type="primary" onClick={showModal}>
         Add Sprint
       </Button>
       <div>
-        <img
-          src="https://res.cloudinary.com/diverse/image/upload/v1679633801/diverse/sbbvjvjlkrdfxas2qfjz.png"
-          alt="two"
-        />
-        <p>@{user.institute}</p>
+        <img src={user.avatar} alt="two" />
+        <div>
+          <p>{user.name}</p>
+          <p>@{user.institute}</p>
+        </div>
       </div>
 
       <Modal

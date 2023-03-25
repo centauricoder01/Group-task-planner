@@ -47,4 +47,14 @@ const LoginUser = async (req, res) => {
   }
 };
 
-module.exports = { SignupUser, AddAvatar, LoginUser };
+const GetOrgUser = async (req, res) => {
+  try {
+    const { org } = req.body;
+    let data = await AuthModel.find({ institute: org });
+    res.send({ message: "User Find", user: data });
+  } catch (error) {
+    res.send({ message: "Some Error", error });
+  }
+};
+
+module.exports = { SignupUser, AddAvatar, LoginUser, GetOrgUser };

@@ -4,9 +4,18 @@ import "../Styles/Home.css";
 import { GrEdit } from "react-icons/gr";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { AddTask, DeleteTask, getSprint } from "../Redux/TaskRedux/Action";
+import { message } from "antd";
+
+import {
+  AddTask,
+  DeleteSprint,
+  DeleteTask,
+  getSprint,
+  UpdatingTask,
+} from "../Redux/TaskRedux/Action";
 import { Input, Modal } from "antd";
 import { Popconfirm } from "antd";
+import { GetUser } from "../Redux/AuthRedux/Action";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -14,9 +23,18 @@ const Home = () => {
   const { user } = useSelector((ele) => ele.Auth);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenTwo, setIsModalOpenTwo] = useState(false);
+  const [allUser, setAllUser] = useState([]);
 
   const [sprintId, setsprintId] = useState("");
+
   const [Taskvalue, setTaskValue] = useState({
+    status: "",
+    details: "",
+    assignee: "",
+  });
+
+  const [updateTaskValue, setUpdateTaskValue] = useState({
     status: "",
     details: "",
     assignee: "",
@@ -26,13 +44,45 @@ const Home = () => {
     setTaskValue({ ...Taskvalue, [e.target.name]: e.target.value });
   };
 
+  const HandleUpdateChange = (e) => {
+    setUpdateTaskValue({ ...updateTaskValue, [e.target.name]: e.target.value });
+  };
+
+  const [UpdateTaskID, setUpdateTaskID] = useState({
+    sprintID: "",
+    taskID: "",
+  });
+
   const showModal = (id) => {
     setIsModalOpen(true);
     setsprintId(id);
   };
 
+  const showModalTwo = (elem, ele) => {
+    setIsModalOpenTwo(true);
+    setUpdateTaskValue({
+      status: elem.status,
+      details: elem.detail,
+      assignee: elem.assignee,
+    });
+
+    setUpdateTaskID({
+      sprintID: ele._id,
+      taskID: elem._id,
+    });
+  };
+  const [messageApi, contextHolder] = message.useMessage();
+
   const handleOk = () => {
     setIsModalOpen(false);
+
+    if (
+      Taskvalue.assignee === "" ||
+      Taskvalue.details === "" ||
+      Taskvalue.status === ""
+    ) {
+      return alert("Please Fill all the Details");
+    }
     dispatch(
       AddTask(sprintId, Taskvalue.status, Taskvalue.details, Taskvalue.assignee)
     ).then((res) => {
@@ -47,8 +97,34 @@ const Home = () => {
     });
   };
 
+  const handleOkTwo = () => {
+    setIsModalOpenTwo(false);
+    if (
+      updateTaskValue.assignee === "" ||
+      updateTaskValue.details === "" ||
+      updateTaskValue.status === ""
+    ) {
+      return messageApi.open({
+        type: "info",
+        content: "Please Fill All the Details",
+        duration: 3,
+      });
+    }
+    dispatch(
+      UpdatingTask(UpdateTaskID.sprintID, UpdateTaskID.taskID, updateTaskValue)
+    ).then((res) => {
+      if (res.message === "Tasked Updated") {
+        dispatch(getSprint(user.institute));
+      }
+    });
+  };
+
   const handleCancel = () => {
     setIsModalOpen(false);
+  };
+
+  const handleCancelTwo = () => {
+    setIsModalOpenTwo(false);
   };
 
   const DeleteTheTask = (sprintID, taskID) => {
@@ -61,6 +137,9 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getSprint(user.institute));
+    dispatch(GetUser(user.institute)).then((res) => {
+      setAllUser(res.user);
+    });
   }, []);
   return (
     <div>
@@ -70,7 +149,22 @@ const Home = () => {
           <div className="singleTaskDiv" key={i}>
             <div className="Heading">
               <h3>{ele.name}</h3>
-              <button onClick={() => showModal(ele._id)}>Add</button>
+              <div style={{ gap: "1rem" }}>
+                <button onClick={() => showModal(ele._id)}>Add</button>
+                <Popconfirm
+                  title="Alert"
+                  description="Do you really want to create this Sprint."
+                  onConfirm={() => {
+                    dispatch(DeleteSprint(ele._id)).then((res) => {
+                      if (res.message === "Sprint Deleted") {
+                        dispatch(getSprint(user.institute));
+                      }
+                    });
+                  }}
+                >
+                  <button>Delete</button>
+                </Popconfirm>
+              </div>
             </div>
             {ele.task.map((elem, i) => (
               <div className="singleDiv" key={i}>
@@ -81,7 +175,10 @@ const Home = () => {
                     <p style={{ backgroundColor: "green" }}>{elem.status}</p>
                   )}
                   <div>
-                    <GrEdit style={{ cursor: "pointer" }} />
+                    <GrEdit
+                      style={{ cursor: "pointer" }}
+                      onClick={() => showModalTwo(elem, ele)}
+                    />
                     <Popconfirm
                       title="Alert"
                       description="Do you really want to create this task."
@@ -108,24 +205,72 @@ const Home = () => {
         onCancel={handleCancel}
       >
         <form>
-          <Input
-            placeholder="Status"
+          <select
             name="status"
             value={Taskvalue.status}
             onChange={HandleChange}
-          />
+          >
+            <option value="">Choose Status</option>
+            <option value="Completed">Completed</option>
+            <option value="Pending">Pending</option>
+          </select>
+
           <Input
             placeholder="Detail"
             name="details"
             value={Taskvalue.details}
             onChange={HandleChange}
           />
-          <Input
-            placeholder="Assignee"
+
+          <select
             name="assignee"
             value={Taskvalue.assignee}
             onChange={HandleChange}
+          >
+            <option value="">Choose Assignee</option>
+            {allUser?.map((ele, i) => (
+              <option value={ele.name} key={i}>
+                {ele.name}
+              </option>
+            ))}
+          </select>
+        </form>
+      </Modal>
+      <Modal
+        title="Update Task"
+        open={isModalOpenTwo}
+        onOk={handleOkTwo}
+        onCancel={handleCancelTwo}
+      >
+        <form>
+          <select
+            name="status"
+            value={updateTaskValue.status}
+            onChange={HandleUpdateChange}
+          >
+            <option value="">Choose Status</option>
+            <option value="Completed">Completed</option>
+            <option value="Pending">Pending</option>
+          </select>
+          <Input
+            placeholder="Detail"
+            name="details"
+            value={updateTaskValue.details}
+            onChange={HandleUpdateChange}
           />
+
+          <select
+            name="assignee"
+            value={updateTaskValue.assignee}
+            onChange={HandleUpdateChange}
+          >
+            <option value="">Choose Assignee</option>
+            {allUser?.map((ele, i) => (
+              <option value={ele.name} key={i}>
+                {ele.name}
+              </option>
+            ))}
+          </select>
         </form>
       </Modal>
     </div>

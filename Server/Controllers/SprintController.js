@@ -68,8 +68,18 @@ const DeleteTask = async (req, res) => {
 const UpdateTask = async (req, res) => {
   try {
     const { sprintID, taskID } = req.body;
+    console.log(sprintID, taskID, req.body.updateTask);
 
-    await SprintModel.update(sprintID, taskID, { $set: { task: req.body } });
+    await SprintModel.findOneAndUpdate(
+      { _id: sprintID, "task._id": taskID },
+      {
+        $set: {
+          "task.$.status": req.body.updateTask.status,
+          "task.$.detail": req.body.updateTask.details,
+          "task.$.assignee": req.body.updateTask.assignee,
+        },
+      }
+    );
 
     res.send({ message: "Tasked Updated" });
   } catch (error) {

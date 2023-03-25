@@ -9,8 +9,8 @@
 
 .navbarDiv div {
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  gap: 10px;
   align-items: center;
 }
 
@@ -18,5 +18,19 @@
   width: 3rem;
   height: 3rem;
   border-radius: 20rem;
-  margin-bottom: -20px;
+}
+
+.navbarDiv div div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbarDiv div div p {
+  font-weight: bold;
+}
+
+.navbarDiv div p:nth-child(2) {
+  margin-top: -29px;
 }

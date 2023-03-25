@@ -1,7 +1,12 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const { AddAvatar, SignupUser, LoginUser } = require("./Controllers/Login");
+const {
+  AddAvatar,
+  SignupUser,
+  LoginUser,
+  GetOrgUser,
+} = require("./Controllers/Login");
 const {
   AddSprint,
   AddTask,
@@ -17,6 +22,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => res.send({ message: "Welcome Back, Sir" }));
+app.post("/getUser", GetOrgUser);
 app.post("/signup", SignupUser);
 app.patch("/avatar", AddAvatar);
 app.post("/login", LoginUser);

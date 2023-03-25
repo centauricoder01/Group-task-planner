@@ -29,12 +29,19 @@ const LoginUser = (email) => async (dispatch) => {
       localStorage.setItem("userAuth", JSON.stringify(data.data.findUser));
       dispatch({ payload: data.data, type: "SignupSucessfull" });
     }
-
-    console.log(data.data);
     return data.data;
   } catch (error) {
     console.log("Some Error");
   }
 };
 
-export { SignupUser, AvatarAdded, LoginUser };
+const GetUser = (org) => async (dispatch) => {
+  try {
+    let data = await axios.post(`${URL}/getUser`, { org });
+    return data.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { SignupUser, AvatarAdded, LoginUser, GetUser };

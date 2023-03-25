@@ -29,7 +29,6 @@ const AddTask = (id, status, detail, assignee) => async (disptach) => {
 const AddSprint = (name, institute) => async (dispatch) => {
   try {
     let data = await axios.post(`${URL}/sprint`, { name, institute });
-    console.log(data.data);
     return data.data;
   } catch (error) {
     console.log(error);
@@ -50,4 +49,38 @@ const DeleteTask = (sprintID, taskID) => async (dispatch) => {
   }
 };
 
-export { getSprint, AddTask, AddSprint, DeleteTask };
+const DeleteSprint = (sprintID) => async (dispatch) => {
+  try {
+    const data = await fetch(`${URL}/deletesprint`, {
+      method: "DELETE",
+      body: JSON.stringify({ sprintID }),
+      headers: { "Content-Type": "application/json" },
+    });
+    let res = await data.json();
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const UpdatingTask = (sprintID, taskID, updateTask) => async (dispatch) => {
+  try {
+    let data = await axios.patch(`${URL}/updatetask`, {
+      sprintID,
+      taskID,
+      updateTask,
+    });
+    return data.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export {
+  getSprint,
+  AddTask,
+  AddSprint,
+  UpdatingTask,
+  DeleteTask,
+  DeleteSprint,
+};
